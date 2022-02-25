@@ -49,7 +49,7 @@ if ($stmt->execute()) {
 // part 4
 $stmt = $db->prepare("
         SELECT username FROM user
-            WHERE id = ANY (SELECT user_fk FROM article HAVING count(user_fk) >= 2)
+            WHERE id = ANY (SELECT user_fk FROM article GROUP BY user_fk HAVING count(user_fk) >= 2)
 ");
 
 if ($stmt->execute()) {
